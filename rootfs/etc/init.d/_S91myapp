@@ -1,0 +1,8 @@
+#!/bin/sh
+rtdate -w
+
+if [[ -f "/sys/class/gpio/gpio60/value" ]];then
+    rtdate -s 1970.1.1-0.0.0
+    rtdate -w
+fi
+
