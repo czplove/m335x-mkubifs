@@ -31,6 +31,6 @@ DIALER_SCRIPT=/etc/ppp/peers/wcdma-dialer
 # as desired. Don't use the 'defaultroute' option if you currently
 # have a default route to an ethernet gateway.
 #
-exec /usr/bin/pppd linkname wcdma lock modem crtscts /dev/ttyUSB3 115200 \
+exec /usr/bin/pppd linkname wcdma lock modem crtscts /dev/ttyUSB2 115200 \
 	asyncmap 20A0000 escape FF kdebug 0 $LOCAL_IP:$REMOTE_IP \
 	noipdefault netmask $NETMASK defaultroute connect $DIALER_SCRIPT
