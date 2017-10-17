@@ -6,3 +6,5 @@ if [[ -f "/sys/class/gpio/gpio60/value" ]];then
     rtdate -w
 fi
 
+#-开始用户应用程序脚本
+/opt/bin/iot_monitor > /dev/null &
