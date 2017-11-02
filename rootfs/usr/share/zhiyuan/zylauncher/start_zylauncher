@@ -64,5 +64,6 @@ else
 	export TSLIB_PLUGINDIR=/usr/lib/ts
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
                                      
-	./framework/framework ./framework/qml/demo.qml -qws  -decoration zydecoration
+#	./framework/framework ./framework/qml/demo.qml -qws  -decoration zydecoration
+	 /opt/bin/iot_tz5000 -qws
 fi

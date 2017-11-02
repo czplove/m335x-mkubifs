@@ -16,7 +16,7 @@ CheckProcess()
 
   #$PROCESS_NUM获取指定进程名的数目，为1返回0，表示正常，不为1返回1，表示有错误，需要重新启动
   PROCESS_NUM=`ps -ef | grep "$1" | grep -v "grep" | wc -l`
-  if [ $PROCESS_NUM -eq 1 ];
+  if [ $PROCESS_NUM -ge 1 ];
   then
     return 0
   else
@@ -24,6 +24,37 @@ CheckProcess()
   fi
 }
 
+
+echo "********** iot_monitor script ************" > /tmp/su.log
+echo "monitor 1: Create iot directory" >> /tmp/su.log
+# Create iot directory in /opt/ if not already exists
+if [ ! -d /opt/share/iot ]; then
+	mkdir -p /opt/share/iot
+fi
+
+if [ ! -d /opt/bin ]; then
+    mkdir /opt/bin
+fi
+
+echo "monitor 2: Cp iot file" >> /tmp/su.log
+isexit=`cat /proc/partitions | grep mmcblk0 | wc -l`
+if [ $isexit == '0' ] ;
+then
+        echo "no sd card detected "
+        #exit 1
+else
+sd_dri=`df -h | awk '/\/dev\/mmcblk0/' | sed -n '1p' | awk '{print $6}'`
+echo "sd cart:"
+echo $sd_dri
+
+if [ ! -f /opt/bin/iot_* ];
+then
+	cp -pR $sd_dri/iot_* /opt/bin/
+fi
+
+fi
+
+echo "monitor 3: run iot" >> /tmp/su.log
 # 检查test实例是否已经存在
 while [ 1 ] ; do
  CheckProcess "iot_sci"
@@ -32,7 +63,9 @@ while [ 1 ] ; do
  then
 
 # 杀死所有test进程，可换任意你需要执行的操作
-
+if [ $isexit != '0' ] ; then
+echo "monitor 3: 1 run iot_sci" >> $sd_dri/su.log
+fi
 
   killall -9 iot_sci
   exec /opt/bin/iot_sci 218.94.153.146:47055 > /dev/null &
@@ -43,6 +76,9 @@ while [ 1 ] ; do
  if [ $CheckQQ_RET -eq 1 ];
  then
 
+if [ $isexit != '0' ] ; then
+echo "monitor 3: 2 run iot_ed" >> $sd_dri/su.log
+fi
   killall -9 iot_ed
   exec /opt/bin/iot_ed > /dev/null &
  fi
@@ -52,6 +88,9 @@ while [ 1 ] ; do
  if [ $CheckQQ_RET -eq 1 ];
  then
 
+if [ $isexit != '0' ] ; then
+echo "monitor 3: 3 run iot_ci" >> $sd_dri/su.log
+fi
   killall -9 iot_ci
   exec /opt/bin/iot_ci > /dev/null &
  fi
@@ -61,6 +100,9 @@ while [ 1 ] ; do
  if [ $CheckQQ_RET -eq 1 ];
  then
     
+if [ $isexit != '0' ] ; then
+echo "monitor 3: 4 run iot_sm" >> $sd_dri/su.log
+fi
   killall -9 iot_sm
   exec /opt/bin/iot_sm > /dev/null &
  fi
@@ -70,6 +112,9 @@ while [ 1 ] ; do
  if [ $CheckQQ_RET -eq 1 ];
  then
 
+if [ $isexit != '0' ] ; then
+echo "monitor 3: 5 run iot_acs" >> $sd_dri/su.log
+fi
   killall -9 iot_acs
   exec /opt/bin/iot_acs > /dev/null &
  fi

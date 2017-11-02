@@ -23,6 +23,11 @@ case "$1" in
 	if [[ "${DNS}" != "0.0.0.0" ]]; then
 		echo "nameserver ${DNS}" >> /etc/resolv.conf
 	fi
+	GW=`eeprom net show gateway`
+        if [[ "${GW}" == "0.0.0.0" ]]; then
+                GW="192.168.9.1"
+        fi
+        route add default gw ${GW}
 	;;
   stop)
 	echo -n "Stopping network..."

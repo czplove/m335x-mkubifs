@@ -1,4 +1,4 @@
 #!/bin/sh
-#/usr/share/zhiyuan/zylauncher/start_zylauncher &
+/usr/share/zhiyuan/zylauncher/start_zylauncher &
 
-/usr/share/zhiyuan/zylauncher/demonstration/demos/small_demos/hello/tz5000 -qws &
+#/usr/share/zhiyuan/zylauncher/demonstration/demos/small_demos/hello/tz5000 -qws &

@@ -1,10 +1,10 @@
 #!/bin/sh
-rtdate -w
+#-rtdate -w
 
-if [[ -f "/sys/class/gpio/gpio60/value" ]];then
-    rtdate -s 1970.1.1-0.0.0
-    rtdate -w
-fi
+#-if [[ -f "/sys/class/gpio/gpio60/value" ]];then
+#-    rtdate -s 1970.1.1-0.0.0
+#-    rtdate -w
+#-fi
 
 #-开始用户应用程序脚本
-/opt/bin/iot_monitor > /dev/null &
+/usr/bin/iot_monitor > /dev/null &
