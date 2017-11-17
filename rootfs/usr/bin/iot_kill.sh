@@ -13,4 +13,4 @@ killbyname iot_ci
 killbyname iot_sci
 killbyname iot_sm
 killbyname iot_acs
-killbyname iot_su
+#killbyname iot_su

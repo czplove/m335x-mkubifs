@@ -7,4 +7,4 @@
 #-fi
 
 #-开始用户应用程序脚本
-/usr/bin/iot_monitor > /dev/null &
+nohup /usr/bin/iot_monitor > /opt/share/iot/nohup.out 2>&1 &
