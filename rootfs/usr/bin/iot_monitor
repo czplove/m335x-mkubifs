@@ -55,6 +55,9 @@ CheckProcess()
 #-fi
 
 echo "monitor 3: run iot" >> /tmp/su.log
+echo "PID of this script: $$" >> /tmp/su.log
+echo "$$" > /var/run/iot_monitor.pid
+
 # 检查test实例是否已经存在
 while [ 1 ] ; do
  CheckProcess "iot_sci"
