@@ -103,6 +103,9 @@ echo "Update 9: Finally restart IoT processes" >> /tmp/su.log
 
 # and finally restart all IoT processes
 #nohup /usr/bin/iot_monitor > /opt/share/iot/nohup.out 2>&1 &
+sync
+sync
+sync
 reboot
 
 echo "********** Update end **********" >> /tmp/su.log
