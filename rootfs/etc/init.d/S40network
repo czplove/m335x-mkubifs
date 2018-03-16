@@ -9,22 +9,22 @@ case "$1" in
 	/sbin/ifup -a
 	IP=`eeprom net show ip`
 	NETMASK=`eeprom net show netmask`
-	if [[ "${IP}" == "0.0.0.0" ]]; then
-		IP="192.168.1.136"
+	if [[ "${IP}" != "192.168.9.22" ]]; then
+		IP="192.168.9.22"
 	fi
-	if [[ "${NETMASK}" = "0.0.0.0" ]]; then
+	if [[ "${NETMASK}" == "0.0.0.0" ]]; then
 		NETMASK="255.255.255.0"
 	fi
 	ifconfig eth0 ${IP} netmask ${NETMASK}
 	if [[ ${?} -ne 0 ]]; then
-		ifconfig eth0 "192.168.1.136" netmask 255.255.255.0
+		ifconfig eth0 "192.168.9.22" netmask 255.255.255.0
 	fi
 	DNS=`eeprom net show dns`
 	if [[ "${DNS}" != "0.0.0.0" ]]; then
 		echo "nameserver ${DNS}" >> /etc/resolv.conf
 	fi
 	GW=`eeprom net show gateway`
-        if [[ "${GW}" == "0.0.0.0" ]]; then
+        if [[ "${GW}" != "192.168.9.1" ]]; then
                 GW="192.168.9.1"
         fi
         route add default gw ${GW}
