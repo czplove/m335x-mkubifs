@@ -9,4 +9,4 @@
 #-开始用户应用程序脚本
 nohup /usr/bin/iot_monitor > /opt/share/iot/nohup.out 2>&1 &
 sleep 10
-/usr/bin/watchdog -c /etc/watchdog.conf  -s
+/opt/bin/watchdog -c /opt/bin/watchdog.conf  -s
